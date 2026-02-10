@@ -5,13 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Publications | Moiz Khan Sherwani, Ph.D.</title>
   
-  <!-- 1. Link to your Master CSS File -->
-  <link rel="stylesheet" href="css/style.css">
-  
-  <!-- 2. Required Libraries (These load the look and feel) -->
+  <!-- 1. Load Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- 2. Load FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <!-- 3. Load AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- 4. Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- 5. INLINE CSS -->
+  <style>
+    :root {
+      --primary-bg: #0f172a;
+      --accent-color: #38bdf8;
+      --secondary-accent: #818cf8;
+      --text-light: #f1f5f9;
+      --glass-bg: rgba(30, 41, 59, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-light);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Neural Canvas Background */
+    #neural-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .navbar-brand { font-weight: 700; color: var(--accent-color) !important; }
+    .nav-link { color: #cbd5e1 !important; margin: 0 10px; transition: color 0.3s; }
+    .nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
+
+    /* Page Header */
+    .page-header {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      margin-top: 60px;
+      padding: 0 20px;
+    }
+    .page-header h1 {
+      font-weight: 700;
+      background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p { color: #94a3b8; font-size: 1.25rem; }
+
+    /* Publication Cards */
+    .publication-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .publication-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px 0 rgba(56, 189, 248, 0.2);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .publication-card h5 { color: #f1f5f9; font-weight: 600; margin-bottom: 1rem; }
+    .publication-card p { color: #cbd5e1; margin-bottom: 1rem; }
+    
+    .doi-link {
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .doi-link:hover {
+      text-decoration: underline;
+      color: #38bdf8 !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -89,7 +187,7 @@
 
     <!-- Paper 5 -->
     <div class="publication-card" data-aos="fade-up" data-aos-delay="400">
-      <h5>Evaluating the impact of training loss on mr to synthetic ct conversion</h5>
+      <h5>Evaluating the impact of training loss on MR to synthetic CT conversion</h5>
       <p><strong>Authors:</strong> M. K. Sherwani, et al. | <strong>Year:</strong> 2020</p>
       <a class="doi-link text-primary" href="https://doi.org/10.1007/978-3-030-64583-0_50" target="_blank">
         <i class="fas fa-link me-1"></i> https://doi.org/10.1007/978-3-030-64583-0_50
@@ -108,22 +206,130 @@
   </div>
 
   <!-- Footer -->
-  <footer class="text-white text-center py-3">
+  <footer class="text-white text-center py-3" style="background: rgba(15, 23, 42, 0.95) !important; border-top: 1px solid rgba(255,255,255,0.1);">
     <div class="container">
       <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Scripts (GOES HERE, AT THE BOTTOM) -->
-  
-  <!-- 1. Bootstrap JS -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- 2. AOS Animation JS (Required for AOS.init to work) -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   
-  <!-- 3. Your Master Script File (Neural Canvas) -->
-  <script src="css/script.js"></script>
+  <script>
+      // Initialize AOS
+      AOS.init({ duration: 800, once: true, offset: 100 });
+  </script>
 
-</body> <!-- Very end of file -->
+  <!-- FIXED Neural Canvas Animation Script -->
+  <script>
+    const canvas = document.getElementById('neural-canvas');
+    const ctx = canvas.getContext('2d');
+    let particlesArray;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+
+    const mouse = { x: null, y: null, radius: 150 };
+    window.addEventListener('mousemove', (event) => { mouse.x = event.x; mouse.y = event.y; });
+    window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
+
+    class Particle {
+      constructor(x, y, directionX, directionY, size, color) {
+        this.x = x; 
+        this.y = y; 
+        this.directionX = directionX; 
+        this.directionY = directionY; 
+        this.size = size; 
+        this.color = color;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = '#38bdf8'; 
+        ctx.fill();
+      }
+      update() {
+        if (this.x > canvas.width || this.x < 0) {
+            this.directionX = -this.directionX;
+        }
+        if (this.y > canvas.height || this.y < 0) {
+            this.directionY = -this.directionY;
+        }
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx*dx + dy*dy);
+        
+        if (distance < mouse.radius + this.size) {
+            if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+                this.x += 10;
+            }
+            if (mouse.x > this.x && this.x > this.size * 10) {
+                this.x -= 10;
+            }
+            if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+                this.y += 10;
+            }
+            if (mouse.y > this.y && this.y > this.size * 10) {
+                this.y -= 10;
+            }
+        }
+        this.x += this.directionX; 
+        this.y += this.directionY; 
+        this.draw();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      let numberOfParticles = (canvas.height * canvas.width) / 9000;
+      for (let i = 0; i < numberOfParticles; i++) {
+        let size = (Math.random() * 2) + 1;
+        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+        let directionX = (Math.random() * 2) - 1;
+        let directionY = (Math.random() * 2) - 1;
+        particlesArray.push(new Particle(x, y, directionX, directionY, size, '#38bdf8'));
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+      }
+      connect();
+    }
+
+    function connect() {
+      let opacityValue = 1;
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+          + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+          
+          if (distance < (canvas.width/7) * (canvas.height/7)) {
+            opacityValue = 1 - (distance / 20000);
+            ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); 
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y); 
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y); 
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    
+    initParticles();
+    animate();
+  </script>
+</body>
 </html>
