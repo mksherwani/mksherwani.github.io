@@ -4,11 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Publications | Moiz Khan Sherwani, Ph.D.</title>
+  
+  <!-- 1. Link to your Master CSS File -->
   <link rel="stylesheet" href="css/style.css">
+  
+  <!-- 2. Required Libraries (These load the look and feel) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 </head>
 <body>
 
-    <!-- Neural Network Canvas Background -->
+    <!-- Neural Canvas Background -->
     <canvas id="neural-canvas"></canvas>
 
     <!-- Navigation -->
@@ -20,86 +27,102 @@
             </button>
             <div id="navbarContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#research">Research</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#news">Insights</a></li>
-                    <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="publications.html">Publications</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-<body>
 
-  <!-- Page Heading -->
-  <header class="page-header">
-    <div class="container">
-      <h1 class="display-5 fw-bold">Publications</h1>
-      <p class="lead">Peer-reviewed research and contributions to science</p>
-    </div>
-  </header>
+    <!-- Page Heading -->
+    <header class="page-header" data-aos="fade-down">
+      <div class="container">
+        <div class="badge mb-3 px-3 py-2 rounded-pill border border-info text-info bg-opacity-10 bg-info">
+            <i class="fas fa-book-open me-2"></i> Academic Contributions
+        </div>
+        <h1 class="display-4 fw-bold">Publications</h1>
+        <p class="lead">Peer-reviewed research and contributions to science</p>
+      </div>
+    </header>
 
-  <!-- Publications List -->
-  <div class="container py-5">
+    <!-- Publications List -->
+    <div class="container py-5">
 
-    <div class="publication-card">
+    <!-- Paper 1 -->
+    <div class="publication-card" data-aos="fade-up">
       <h5>A systematic literature review: deep learning techniques for synthetic medical image generation and their applications in radiotherapy</h5>
       <p><strong>Authors:</strong> M. K. Sherwani & Shyam Gopalakrishnan | <strong>Year:</strong> 2024</p>
       <a class="doi-link text-primary" href="https://doi.org/10.3389/fradi.2024.1385742" target="_blank">
-        https://doi.org/10.3389/fradi.2024.1385742
+        <i class="fas fa-link me-1"></i> https://doi.org/10.3389/fradi.2024.1385742
       </a>
     </div>
 
-    <div class="publication-card">
+    <!-- Paper 2 -->
+    <div class="publication-card" data-aos="fade-up" data-aos-delay="100">
       <h5>Addressing persistent challenges in digital image analysis of cancerous tissues</h5>
       <p><strong>Authors:</strong> S. Prabhakaran, et al. | <strong>Year:</strong> 2023</p>
       <a class="doi-link text-primary" href="https://doi.org/10.1101/2023.07.21.548450" target="_blank">
-        https://doi.org/10.1101/2023.07.21.548450
+        <i class="fas fa-link me-1"></i> https://doi.org/10.1101/2023.07.21.548450
       </a>
     </div>
 
-    <div class="publication-card">
+    <!-- Paper 3 -->
+    <div class="publication-card" data-aos="fade-up" data-aos-delay="200">
       <h5>Lesion segmentation in lung CT scans using unsupervised adversarial learning</h5>
       <p><strong>Authors:</strong> M. K. Sherwani, et al. | <strong>Year:</strong> 2022</p>
       <a class="doi-link text-primary" href="https://doi.org/10.1007/s11517-022-02651-8" target="_blank">
-        https://doi.org/10.1007/s11517-022-02651-8
+        <i class="fas fa-link me-1"></i> https://doi.org/10.1007/s11517-022-02651-8
       </a>
     </div>
 
-        <div class="publication-card">
+    <!-- Paper 4 -->
+    <div class="publication-card" data-aos="fade-up" data-aos-delay="300">
       <h5>Role of Deep Learning for Smart Health Care</h5>
       <p><strong>Authors:</strong> M. K. Sherwani, et al. | <strong>Year:</strong> 2022</p>
       <a class="doi-link text-primary" href="https://doi.org/10.1007/978-3-030-96429-0_8" target="_blank">
-        https://doi.org/10.1007/978-3-030-96429-0_8
+        <i class="fas fa-link me-1"></i> https://doi.org/10.1007/978-3-030-96429-0_8
       </a>
     </div>
 
-        <div class="publication-card">
+    <!-- Paper 5 -->
+    <div class="publication-card" data-aos="fade-up" data-aos-delay="400">
       <h5>Evaluating the impact of training loss on mr to synthetic ct conversion</h5>
       <p><strong>Authors:</strong> M. K. Sherwani, et al. | <strong>Year:</strong> 2020</p>
       <a class="doi-link text-primary" href="https://doi.org/10.1007/978-3-030-64583-0_50" target="_blank">
-        https://doi.org/10.1007/978-3-030-64583-0_50
+        <i class="fas fa-link me-1"></i> https://doi.org/10.1007/978-3-030-64583-0_50
       </a>
     </div>
 
-        <div class="publication-card">
+    <!-- Paper 6 -->
+    <div class="publication-card" data-aos="fade-up" data-aos-delay="500">
       <h5>Semantic Similarities between Locations based on Ontology.</h5>
       <p><strong>Authors:</strong> M. K. Sherwani, et al. | <strong>Year:</strong> 2017</p>
       <a class="doi-link text-primary" href="https://nlp.fi.muni.cz/raslan/raslan17.pdf" target="_blank">
-        https://doi.org/10.1101/abc
+        <i class="fas fa-link me-1"></i> https://doi.org/10.1101/abc
       </a>
     </div>
 
   </div>
 
   <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
+  <footer class="bg-dark text-white text-center py-3" style="background: rgba(15, 23, 42, 0.95) !important; border-top: 1px solid rgba(255,255,255,0.1);">
     <div class="container">
       <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Bootstrap JS -->
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <script>
+      AOS.init({ duration: 800, once: true, offset: 100 });
+  </script>
+
+  <!-- Your Master Script File -->
   <script src="css/script.js"></script>
 </body>
 </html>
