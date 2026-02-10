@@ -1,321 +1,757 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="google-site-verification" content="L5MLi0n7AtDGnBmaTAglyx9nadNT4saQXXZ5Qnkxsqg" />
-  <title>Moiz Khan Sherwani, Ph.D. - AI Vision & Medical Imaging</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="L5MLi0n7AtDGnBmaTAglyx9nadNT4saQXXZ5Qnkxsqg" />
+    <title>Moiz Khan Sherwani, Ph.D. - AI Vision & Medical Imaging</title>
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="style.css" />
-  <style>
-      header.hero-bg {
-        background: url('images/cover_image.png') center top no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-        color: white;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        padding-top: 80px; /* Match or slightly exceed navbar height */
-      }
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-    .card-clickable {
-      cursor: pointer;
-    }
-  </style>
+    <style>
+        :root {
+            --primary-bg: #0f172a;
+            --accent-color: #38bdf8;
+            --secondary-accent: #818cf8;
+            --text-light: #f1f5f9;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --card-hover: rgba(56, 189, 248, 0.15);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Neural Network Background Canvas --- */
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--accent-color) !important;
+        }
+
+        .nav-link {
+            color: #cbd5e1 !important;
+            position: relative;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            min-height: 1.5em; /* Reserve space for typing effect */
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--accent-color);
+            animation: blink 1s infinite;
+        }
+
+        /* --- Glass Cards Utility --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(56, 189, 248, 0.2);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        /* --- About Section --- */
+        .profile-img-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--accent-color);
+            filter: blur(20px);
+            opacity: 0.4;
+            z-index: 1;
+            animation: pulse 3s infinite;
+        }
+
+        /* --- Research Circles --- */
+        .research-circle {
+            width: 100%;
+            max-width: 280px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            color: #0f172a;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .research-circle:hover {
+            transform: scale(1.05) rotate(2deg);
+            background: #fff;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
+        }
+
+        .research-circle img {
+            max-width: 80px;
+            max-height: 80px;
+            margin-bottom: 1rem;
+            object-fit: contain;
+        }
+
+        /* --- Blog Cards --- */
+        .blog-card-img-wrapper {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .glass-card:hover .blog-card-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        /* --- Partner/Collaborator Logos --- */
+        .partner-logo {
+            filter: grayscale(100%) brightness(0.8);
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            cursor: default;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%) brightness(1.1);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* --- Buttons --- */
+        .btn-glow {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-glow:hover {
+            background: var(--accent-color);
+            color: #0f172a;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.4; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.2; }
+            100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.4; }
+        }
+
+        /* Section Spacing */
+        section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2.section-title {
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2.section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-color), var(--secondary-accent));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Moiz Khan Sherwani, Ph.D.</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="navbarContent" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
-          <li class="nav-item"><a class="nav-link" href="#news">Blogs</a></li>
-          <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- Neural Network Canvas Background -->
+    <canvas id="neural-canvas"></canvas>
 
-  <!-- Hero Section with Background Image -->
-  <header class="hero-bg text-white text-center py-5" style="margin-top: 56px;">
-    <div class="container" data-aos="fade-up">
-      <h1 class="display-4">AI Vision, Medical Imaging & Multi-omics</h1>
-      <p class="lead">Data Scientist | Machine Learning Scientist | Computational Biologist</p>
-    </div>
-  </header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dna me-2"></i> Moiz Khan Sherwani
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fa fa-bars" style="color: white;"></span>
+            </button>
+            <div id="navbarContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<!-- About Me Section -->
-<section id="about" class="py-5 bg-dark text-white">
-  <div class="container">
-    <div class="row align-items-center" data-aos="fade-right">
-      <div class="col-md-4 text-center mb-4 mb-md-0">
-        <img src="images/profile.png" alt="Moiz Khan Sherwani" 
-         class="img-fluid rounded-circle shadow"
-         style="width: 250px; height: 250px; object-fit: cover; background-color: #333; border: 4px solid white;">
-        <div class="mt-3">
-        <a href="mailto:mk_sherwani@hotmail.com" class="text-white mx-2" target="_blank" title="Email">
-          <i class="fas fa-envelope fa-lg"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/mk-sherwani" class="text-white mx-2" target="_blank" title="LinkedIn">
-          <i class="fab fa-linkedin fa-lg"></i>
-        </a>
-        <a href="https://github.com/mksherwani" class="text-white mx-2" target="_blank" title="GitHub">
-          <i class="fab fa-github fa-lg"></i>
-        </a>
-      </div>
-      </div>
-      <div class="col-md-8">
-        <h2 class="mb-3">About Me</h2>
-        <p>
-          Welcome to my website! My name is Moiz, and I'm a Data / ML Scientist and computational biologist.
-          With a Ph.D. focused on deep learning applications in healthcare imaging, my work bridges advanced computer vision techniques and biological data science.
-          My work focuses on leveraging deep learning, graph neural networks, and computational biology to develop scalable solutions 
-          for precision healthcare and clinical decision support.
-        </p>
-        <p>
-          My expertise lies in medical image synthesis, graph neural networks for multi-omics integration, and real-world AI systems for diagnostics. I am passionate about building intelligent models that push the boundaries of healthcare innovation.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Research Section -->
-<section id="research" class="py-5" style="background-color: #505063; color: white;">
-  <div class="container" data-aos="fade-up">
-    <h2 class="text-center mb-5">Research</h2>
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <div data-aos="zoom-in" data-aos-duration="1000">
+                <div class="badge mb-3 px-3 py-2 rounded-pill border border-info text-info bg-opacity-10 bg-info">
+                    <i class="fas fa-atom me-2"></i> Ph.D. in AI & Medical Imaging
+                </div>
+                <h1 class="display-3 hero-title">Moiz Khan Sherwani</h1>
+                <h3 class="hero-subtitle">
+                    I am a <span id="typewriter"></span><span class="cursor">&nbsp;</span>
+                </h3>
+                <div class="mt-5">
+                    <a href="#research" class="btn btn-glow me-3">Explore Research</a>
+                    <a href="#contact" class="btn btn-outline-light rounded-pill px-4 py-2">Connect</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center mb-5 mb-lg-0" data-aos="fade-right">
+                    <div class="profile-img-container">
+                        <div class="profile-glow"></div>
+                        <!-- Fallback background color if image missing -->
+                        <img src="images/profile.png" alt="Moiz Khan Sherwani" class="profile-img" 
+                             onerror="this.style.display='none'; this.parentElement.style.backgroundColor='#38bdf8';">
+                    </div>
+                    <div class="mt-4 d-flex justify-content-center gap-4">
+                        <a href="mailto:mk_sherwani@hotmail.com" class="text-light fs-4 hover-accent"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.linkedin.com/in/mk-sherwani" target="_blank" class="text-light fs-4 hover-accent"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/mksherwani" target="_blank" class="text-light fs-4 hover-accent"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-8" data-aos="fade-left">
+                    <h2 class="section-title text-start">About Me</h2>
+                    <div class="glass-card p-4 p-md-5">
+                        <p class="lead text-info mb-3">Bridging the gap between Advanced Computer Vision and Biological Data Science.</p>
+                        <p>
+                            Welcome to my digital space. I am a Data Scientist and Computational Biologist with a Ph.D. focused on deep learning applications in healthcare imaging. 
+                            My mission is to leverage cutting-edge technologies like <strong>Graph Neural Networks (GNNs)</strong> and <strong>Multi-omics Integration</strong> to solve complex problems in precision healthcare.
+                        </p>
+                        <p>
+                            Currently, my work focuses on developing scalable AI systems for clinical decision support, medical image synthesis, and uncovering hidden molecular relationships in biological data. I am passionate about building intelligent models that aren't just theoretically sound, but practically transformative for patient care.
+                        </p>
+                        <div class="row mt-4 g-3">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-brain fa-2x text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">Deep Learning</h6>
+                                        <small class="text-muted">CNNs, GANs, Vision Transformers</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-project-diagram fa-2x text-info me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">Bioinformatics</h6>
+                                        <small class="text-muted">GNNs, Multi-omics, Genomics</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">Research Areas</h2>
+            <div class="row justify-content-center g-4">
+                
+                <!-- Research 1 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div onclick="window.open('multiomics-gnn.html', '_blank')">
+                        <div class="research-circle">
+                            <img src="images/multi-omic.png" alt="Multi-omics" onerror="this.src='https://picsum.photos/seed/multiomic/100/100'">
+                            <h5 class="fw-bold">Multi-omics & GNN</h5>
+                            <p class="small text-center mb-0">Integrating biological networks to uncover hidden molecular relationships.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research 2 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div onclick="window.open('image-segmentation.html', '_blank')">
+                        <div class="research-circle">
+                            <img src="images/segmentation.jpg" alt="AI Vision" onerror="this.src='https://picsum.photos/seed/vision/100/100'">
+                            <h5 class="fw-bold">AI Vision</h5>
+                            <p class="small text-center mb-0">Segmentation & Detection using advanced deep learning architectures.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research 3 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div onclick="window.open('medical-imaging.html', '_blank')">
+                        <div class="research-circle">
+                            <img src="images/brain.jpg" alt="Medical Imaging" onerror="this.src='https://picsum.photos/seed/brain/100/100'">
+                            <h5 class="fw-bold">Cross-Modality Synthesis</h5>
+                            <p class="small text-center mb-0">Bridging imaging domains for robust clinical decision-making.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Blogs Section -->
+    <section id="news">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">Insights & Blogs</h2>
+            <div class="row g-4 justify-content-center">
+
+                <!-- Blog 1 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card" onclick="window.location.href='blogs/blog-1.html';" style="cursor: pointer;">
+                        <div class="blog-card-img-wrapper">
+                            <img src="images/blogs/blog1.jpg" alt="Blog 1" onerror="this.src='https://picsum.photos/seed/blog1/400/300'">
+                        </div>
+                        <div class="p-4">
+                            <span class="badge bg-primary mb-2">AI Trends</span>
+                            <h5 class="fw-bold">AI Revolutionizing Imaging</h5>
+                            <p class="small text-muted mb-3">How AI is revolutionizing imaging with diffusion models?</p>
+                            <span class="text-info small fw-bold">Read More <i class="fas fa-arrow-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card" onclick="window.location.href='blogs/blog-2.html';" style="cursor: pointer;">
+                        <div class="blog-card-img-wrapper">
+                            <img src="images/blogs/blog2.jpg" alt="Blog 2" onerror="this.src='https://picsum.photos/seed/blog2/400/300'">
+                        </div>
+                        <div class="p-4">
+                            <span class="badge bg-success mb-2">Healthcare</span>
+                            <h5 class="fw-bold">AI in Patient Care</h5>
+                            <p class="small text-muted mb-3">Once a promise, now a presence — but are we ready for its full potential?</p>
+                            <span class="text-info small fw-bold">Read More <i class="fas fa-arrow-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card" onclick="window.location.href='blogs/blog-3.html';" style="cursor: pointer;">
+                        <div class="blog-card-img-wrapper">
+                            <img src="images/blogs/blog3.jpg" alt="Blog 3" onerror="this.src='https://picsum.photos/seed/blog3/400/300'">
+                        </div>
+                        <div class="p-4">
+                            <span class="badge bg-warning text-dark mb-2">Technology</span>
+                            <h5 class="fw-bold">The Rise of AI</h5>
+                            <p class="small text-muted mb-3">From Sci-Fi to Sidekick — AI is Already Here.</p>
+                            <span class="text-info small fw-bold">Read More <i class="fas fa-arrow-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications CTA -->
+    <section id="publications" class="py-5">
+        <div class="container">
+            <div class="glass-card p-5 text-center" data-aos="zoom-in">
+                <h2 class="fw-bold mb-3">Academic Contributions</h2>
+                <p class="fs-5 text-light mb-4">Explore my peer-reviewed publications and detailed research findings.</p>
+                <a href="publications.html" class="btn btn-glow btn-lg">View Full List <i class="fas fa-book-open ms-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funded Projects & Collaborators -->
+    <section id="funded-projects" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h4 class="text-muted mb-4 text-uppercase letter-spacing-2">Funded By</h4>
+                </div>
+                <div class="col-6 col-md-3 mb-4 text-center" data-aos="flip-left">
+                    <img src="images/funders/nsf.png" alt="NSF" class="img-fluid partner-logo rounded-circle mb-2 p-3" style="max-width: 120px; background:white; border-radius:20px;" onerror="this.style.display='none'">
+                    <p class="fw-bold">EU Horizon</p>
+                </div>
+                <div class="col-6 col-md-3 mb-4 text-center" data-aos="flip-left" data-aos-delay="100">
+                    <img src="images/funders/nih.png" alt="NIH" class="img-fluid partner-logo rounded-circle mb-2 p-3" style="max-width: 120px; background:white; border-radius:20px;" onerror="this.style.display='none'">
+                    <p class="fw-bold">ESCMID</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center pt-4 border-top border-secondary">
+                <div class="col-12 text-center">
+                    <h4 class="text-muted mb-4 text-uppercase letter-spacing-2">Collaborators</h4>
+                </div>
+                <div class="col-6 col-md-3 mb-4 text-center" data-aos="flip-right">
+                    <img src="images/collaborators/stanford.png" alt="Stanford" class="img-fluid partner-logo rounded-circle mb-2 p-3" style="max-width: 120px; background:white; border-radius:20px;" onerror="this.style.display='none'">
+                    <p class="fw-bold">Univ. of Copenhagen</p>
+                </div>
+                <div class="col-6 col-md-3 mb-4 text-center" data-aos="flip-right" data-aos-delay="100">
+                    <img src="images/collaborators/mayo.png" alt="Mayo Clinic" class="img-fluid partner-logo rounded-circle mb-2 p-3" style="max-width: 120px; background:white; border-radius:20px;" onerror="this.style.display='none'">
+                    <p class="fw-bold">Univ. of Calabria</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 border-top border-secondary">
+        <div class="container text-center">
+            <p class="mb-0 text-muted">&copy; 2025 Moiz Khan Sherwani, Ph.D.</p>
+            <small class="text-muted">Bridging Intelligence and Life Sciences.</small>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
-    <!-- Start of ROW -->
-    <div class="row text-center justify-content-center">
+    <script>
+        // --- 1. Initialize AOS (Animate on Scroll) ---
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
 
-      <!-- First Card -->
-      <div class="col-md-4 mb-4">
-        <div onclick="window.open('multiomics-gnn.html', '_blank')" style="cursor: pointer;">
-          <div class="mx-auto p-4" style="width: 350px; height: 350px; border-radius: 50%; background-color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-            <img src="images/multi-omic.png" alt="Multi-omics & GNN" style="width: 160px; height: 130px; margin-bottom: 10px;">
-            <h5 class="fw-bold mb-2">Multi-omics Integration with GNN</h5>
-            <p class="small text-center mb-0">Integrating multi-omics data using GNN to model intricate biological networks & uncover hidden molecular relationships.</p>
-          </div>
-        </div>
-      </div>
+        // --- 2. Typewriter Effect for Hero Subtitle ---
+        const texts = ["Data Scientist", "Machine Learning Scientist", "Computational Biologist"];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+        let isDeleting = false;
 
-      <!-- Second Card -->
-      <div class="col-md-4 mb-4">
-        <div onclick="window.open('image-segmentation.html', '_blank')" style="cursor: pointer;">
-          <div class="mx-auto p-4" style="width: 350px; height: 350px; border-radius: 50%; background-color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-            <img src="images/segmentation.jpg" alt="AI Vision" style="width: 120px; height: 120px; margin-top: -15px; margin-bottom: 10px;">
-            <h5 class="fw-bold mb-2">AI Vision (Segmentation & Detection)</h5>
-            <p class="small text-center mb-0">Advanced deep learning techniques for image segmentation and object detection.</p>
-          </div>
-        </div>
-      </div>
+        (function type() {
+            if (count === texts.length) {
+                count = 0;
+            }
+            currentText = texts[count];
 
-      <!-- Third Card -->
-      <div class="col-md-4 mb-4">
-        <div onclick="window.open('medical-imaging.html', '_blank')" style="cursor: pointer;">
-          <div class="mx-auto p-4" style="width: 350px; height: 350px; border-radius: 50%; background-color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-            <img src="images/brain.jpg" alt="Medical Imaging" style="width: 120px; height: 120px; margin-top: -15px; margin-bottom: 10px;">
-            <h5 class="fw-bold mb-2">Cross-Modality Image Synthesis</h5>
-            <p class="small text-center mb-0">Advanced cross-modality synthesis techniques that bridge imaging domains for robust, data-driven clinical decision-making.</p>
-          </div>
-        </div>
-      </div>
+            if (isDeleting) {
+                letter = currentText.slice(0, --index);
+            } else {
+                letter = currentText.slice(0, ++index);
+            }
 
-    </div> <!-- End of ROW -->
+            document.getElementById('typewriter').textContent = letter;
 
-  </div>
-</section>
+            let typeSpeed = 100;
+            if (isDeleting) typeSpeed = 50;
 
-  
-<!-- News & Blogs Section -->
-<section id="news" class="py-5 style="background-color:#6e6e7d;">
-  <div class="container" data-aos="fade-up">
-    <h2 class="text-center mb-5">News & Blogs</h2>
-    <div class="row text-center justify-content-center">
+            if (!isDeleting && letter.length === currentText.length) {
+                typeSpeed = 2000; // Wait at end
+                isDeleting = true;
+            } else if (isDeleting && letter.length === 0) {
+                isDeleting = false;
+                count++;
+                typeSpeed = 500; // Wait before new word
+            }
 
-      <!-- Blog Card 1 -->
-      <div class="col-md-4 mb-4">
-        <div onclick="window.location.href = 'blogs/blog-1.html';" style="cursor: pointer;">
-          <div class="mx-auto" style="width: 100%; height: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); background-color: #fff; display: flex; flex-direction: column;">
-      
-            <!-- Image Section (Fixed height) -->
-            <div style="flex-shrink: 0; height: 55%; width: 100%; overflow: hidden;">
-              <img 
-                src="images/blogs/blog1.jpg" 
-                alt="Blog Image" 
-                style="width: 100%; height: 100%; object-fit: cover;"
-              />
-            </div>
-      
-            <!-- Text Section (Flexible height) -->
-            <div style="padding: 1rem; flex-grow: 1; text-align: center; background-color: #f8f9fa; color: #000;">
-              <h5 class="fw-bold mb-2">AI Revolutionalizing Imaging</h5>
-              <p class="small mb-0">How AI is revolutionalizing imaging with diffusion models?</p>
-            </div>
-      
-          </div>
-        </div>
-      </div>
+            setTimeout(type, typeSpeed);
+        })();
 
-      <!-- Blog Card 2 -->
-      <div class="col-md-4 mb-4">
-        <div onclick="window.location.href = 'blogs/blog-2.html';" style="cursor: pointer;">
-          <div class="mx-auto" style="width: 100%; height: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); background-color: #fff; display: flex; flex-direction: column;">
-      
-            <!-- Image Section (Fixed height) -->
-            <div style="flex-shrink: 0; height: 55%; width: 100%; overflow: hidden;">
-              <img 
-                src="images/blogs/blog2.jpg" 
-                alt="Blog Image" 
-                style="width: 100%; height: 100%; object-fit: cover;"
-              />
-            </div>
-      
-            <!-- Text Section (Flexible height) -->
-            <div style="padding: 1rem; flex-grow: 1; text-align: center; background-color: #f8f9fa; color: #000;">
-              <h5 class="fw-bold mb-2">AI in Patient Care</h5>
-              <p class="small mb-0">once a promise, now a presence — but are we ready for its full potential?</p>
-            </div>
-      
-          </div>
-        </div>
-      </div>
+        // --- 3. Interactive Neural Network Background Animation ---
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
 
+        // Resize Canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-      <!-- Blog Card 3 -->
-      <div class="col-md-4 mb-4">
-        <div onclick="window.location.href = 'blogs/blog-3.html';" style="cursor: pointer;">
-          <div class="mx-auto" style="width: 100%; height: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); background-color: #fff; display: flex; flex-direction: column;">
-      
-            <!-- Image Section (Fixed height) -->
-            <div style="flex-shrink: 0; height: 55%; width: 100%; overflow: hidden;">
-              <img 
-                src="images/blogs/blog3.jpg" 
-                alt="Blog Image" 
-                style="width: 100%; height: 100%; object-fit: cover;"
-              />
-            </div>
-      
-            <!-- Text Section (Flexible height) -->
-            <div style="padding: 1rem; flex-grow: 1; text-align: center; background-color: #f8f9fa; color: #000;">
-              <h5 class="fw-bold mb-2">The Rise of AI: Transforming Everyday Life</h5>
-              <p class="small mb-0">From Sci-Fi to Sidekick — AI is Already Here.</p>
-            </div>
-      
-          </div>
-        </div>
-      </div>
-</section>
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
 
-<!-- Publications Redirect -->
-<section id="publications" class="py-5" style="background-color: #f1f1f1;">
-  <div class="container text-center" data-aos="fade-up">
-    <h2 class="mb-4 text-dark">Publications</h2>
-    <p class="fs-5 text-dark">To explore my peer-reviewed publications and academic contributions,</p>
-    <a href="publications.html" class="btn btn-outline-dark">Click Here to View Full List</a>
-  </div>
-</section>
-
-<!-- Funded Projects Section -->
-<section id="funded-projects" class="py-5 bg-dark text-white">
-  <div class="container" data-aos="fade-up">
-    <h2 class="text-center mb-5">Funded Projects</h2>
-    <div class="row justify-content-center text-center">
-
-      <!-- Project Logo 1 -->
-      <div class="col-6 col-md-3 mb-4">
-        <img src="images/funders/nsf.png" alt="NSF" class="img-fluid rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid white;">
-        <h6 class="mt-2">EU Horizon</h6>
-      </div>
-
-      <!-- Project Logo 2 -->
-      <div class="col-6 col-md-3 mb-4">
-        <img src="images/funders/nih.png" alt="NIH" class="img-fluid rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid white;">
-        <h6 class="mt-2">ESCMID</h6>
-      </div>
-
-      <!-- Add more funders as needed -->
-    </div>
-  </div>
-</section>
-
-<!-- Collaborators Section -->
-<section id="collaborators" class="py-5 bg-secondary text-white">
-  <div class="container" data-aos="fade-up">
-    <h2 class="text-center mb-5">Collaborators</h2>
-    <div class="row justify-content-center text-center">
-
-      <!-- Collaborator Logo 1 -->
-      <div class="col-6 col-md-3 mb-4">
-        <img src="images/collaborators/stanford.png" alt="Stanford" class="img-fluid rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid white;">
-        <h6 class="mt-2">University of Copenhagen</h6>
-      </div>
-
-      <!-- Collaborator Logo 2 -->
-      <div class="col-6 col-md-3 mb-4">
-        <img src="images/collaborators/mayo.png" alt="Mayo Clinic" class="img-fluid rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid white;">
-        <h6 class="mt-2">University of Calabria</h6>
-      </div>
-
-      <!-- Add more collaborators as needed -->
-    </div>
-  </div>
-</section>
-
-
-  <!-- Footer -->
-  <footer class="bg-secondary text-white text-center py-3">
-    <div class="container">
-      <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    AOS.init();
-    const ctx = document.getElementById('projectChart').getContext('2d');
-    const projectChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['AI Vision', 'Medical Imaging', 'Multi-omics'],
-        datasets: [{
-          label: 'Project Areas',
-          data: [45, 25, 30],
-          backgroundColor: ['#007bff', '#28a745', '#ffc107'],
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          }
+        // Mouse interaction
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 150
         }
-      }
-    });
-  </script>
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+        
+        // Remove mouse influence when leaving window
+        window.addEventListener('mouseout', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        })
+
+        // Particle Class
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            // Draw particle
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = '#38bdf8'; // Accent color
+                ctx.fill();
+            }
+            // Update particle position & interaction
+            update() {
+                // Border collision
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+
+                // Mouse collision (repel effect)
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+
+                if (distance < mouse.radius + this.size) {
+                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+                        this.x += 10;
+                    }
+                    if (mouse.x > this.x && this.x > this.size * 10) {
+                        this.x -= 10;
+                    }
+                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+                        this.y += 10;
+                    }
+                    if (mouse.y > this.y && this.y > this.size * 10) {
+                        this.y -= 10;
+                    }
+                }
+                
+                // Move particle
+                this.x += this.directionX;
+                this.y += this.directionY;
+                
+                this.draw();
+            }
+        }
+
+        // Init Particles
+        function initParticles() {
+            particlesArray = [];
+            // Number of particles depends on screen size to avoid lag on mobile
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 2) - 1; // Speed
+                let directionY = (Math.random() * 2) - 1;
+                let color = '#38bdf8';
+
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        // Draw lines between nearby particles (The Neural Network Effect)
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                    + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    
+                    // If close enough, draw line
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue + ')'; // Cyan lines
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Start Animation
+        initParticles();
+        animate();
+
+        // --- 4. Navbar Scroll Effect ---
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.style.background = 'rgba(15, 23, 42, 0.7)';
+            }
+        });
+
+    </script>
 </body>
 </html>
