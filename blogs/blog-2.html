@@ -3,132 +3,231 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI in Healthcare</title>
+  <title>AI in Healthcare | Moiz Khan Sherwani</title>
+  
+  <!-- 1. Master CSS File -->
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <!-- 2. Bootstrap (Layout) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- 3. FontAwesome (Icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <!-- 4. AOS (Animations) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- 5. Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+  <!-- 6. Inline CSS (Backup) -->
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.7;
-      padding-top: 70px;
+    :root {
+      --primary-bg: #0f172a;
+      --accent-color: #38bdf8;
+      --secondary-accent: #818cf8;
+      --text-light: #f1f5f9;
+      --glass-bg: rgba(30, 41, 59, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
     }
 
-    .hero {
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-light);
+      line-height: 1.7;
+      overflow-x: hidden;
       position: relative;
-      height: 60vh;
-      background: 
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url('../images/blogs/blog2.jpg') center center / cover no-repeat;
+    }
+
+    /* Neural Canvas Background */
+    #neural-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .navbar-brand { font-weight: 700; color: var(--accent-color) !important; }
+    .nav-link { color: #cbd5e1 !important; margin: 0 10px; transition: color 0.3s; }
+    .nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
+
+    /* Blog Header */
+    .page-header {
+      min-height: 40vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
       text-align: center;
+      position: relative;
+      margin-top: 80px;
+      padding: 0 20px;
+    }
+    .page-header h1 {
+      font-weight: 700;
+      background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p { color: #94a3b8; font-size: 1.25rem; }
+
+    /* NEW: Hero Image Section */
+    .hero-image-wrapper {
+        width: 100%;
+        max-width: 900px;
+        margin: -30px auto 40px auto; /* Pull it up closer to header */
+        position: relative;
+        z-index: 1;
+    }
+    .hero-image {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        border: 2px solid rgba(56, 189, 248, 0.3); /* Cyan glow border */
+        display: block;
     }
 
-    .hero h1 {
-      font-size: 2.8rem;
-      font-weight: 600;
-      text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
-    }
-
-    .content-container {
+    /* Blog Content */
+    .blog-content {
       max-width: 800px;
-      margin: 2rem auto;
+      margin: 0 auto;
+    }
+    
+    .blog-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      padding: 3rem;
+      margin-bottom: 3rem;
+    }
+    
+    .blog-card h3 { color: var(--accent-color); margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+    .blog-card p { color: #cbd5e1; margin-bottom: 1.5rem; }
+
+    .highlight-box {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--accent-color);
+      border-radius: 15px;
       padding: 2rem;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    .callout {
-      background-color: #f0f8ff;
-      border-left: 5px solid #0d6efd;
-      padding: 1rem;
-      margin-bottom: 2rem;
-      border-radius: 5px;
-    }
-
-    pre {
-      background-color: #f8f9fa;
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 3rem;
-      padding-bottom: 2rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
-
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="../index.html">Moiz Khan Sherwani, Ph.D.</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#research">Research</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#news">Blogs</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#publications">Publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
-        </ul>
+
+    <!-- 1. Neural Canvas Background -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- 2. Navigation (Standard) -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html"><i class="fas fa-dna me-2"></i> Moiz K. Sherwani</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="fa fa-bars" style="color: white;"></span>
+            </button>
+            <div id="navbarContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../index.html#news">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../publications.html">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. Header -->
+    <header class="page-header" data-aos="fade-down">
+      <div class="container">
+        <div class="badge mb-3 px-3 py-2 rounded-pill border border-info text-info bg-opacity-10 bg-info">
+            <i class="fas fa-heartbeat me-2"></i> Patient Care
+        </div>
+        <h1>AI in Healthcare</h1>
+        <p class="lead">Revolutionizing the Future of Medicine</p>
       </div>
-    </div>
-  </nav>
+    </header>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <h1>AI in Healthcare: Revolutionizing Patient Care</h1>
-    <!-- 📸 Replace the background image URL in the CSS above to change the blog banner -->
-  </div>
-
-  <!-- Blog Content -->
-  <div class="content-container">
-    <p>Artificial Intelligence (AI) is rapidly transforming the healthcare landscape, offering innovative solutions that enhance patient care, streamline operations, and improve outcomes. From early disease detection to personalized treatment plans, AI's integration into healthcare systems is ushering in a new era of medical excellence.</p>
-
-    <h2>Early Diagnosis and Predictive Analytics</h2>
-    <p>AI algorithms can analyze vast amounts of medical data to identify patterns and predict potential health issues before they become critical. For instance, machine learning models can detect early signs of diseases like cancer or diabetes by examining medical imaging or patient records, enabling timely interventions.</p>
-
-    <h2>Personalized Treatment Plans</h2>
-    <p>By considering individual patient data, including genetics, lifestyle, and medical history, AI can assist in crafting personalized treatment plans. This tailored approach ensures that patients receive the most effective therapies, reducing trial-and-error in treatment selection and enhancing recovery rates.</p>
-
-    <h2>Virtual Health Assistants</h2>
-    <p>AI-powered virtual assistants are becoming increasingly prevalent, providing patients with 24/7 access to medical information, appointment scheduling, and medication reminders. These tools enhance patient engagement and adherence to treatment plans, leading to better health outcomes.</p>
-
-    <h2>Streamlining Administrative Tasks</h2>
-    <p>Administrative burdens in healthcare can detract from patient care. AI can automate routine tasks such as billing, scheduling, and record-keeping, allowing healthcare professionals to focus more on patient interactions and less on paperwork.</p>
-
-    <h2>Challenges and Ethical Considerations</h2>
-    <p>While AI offers numerous benefits, it also presents challenges, including data privacy concerns, algorithmic biases, and the need for transparency in decision-making processes. Addressing these issues is crucial to ensure equitable and ethical AI deployment in healthcare.</p>
-
-    <div class="callout">
-      <strong>Did You Know?</strong> AI applications in healthcare are projected to save the industry over $150 billion annually by 2026 through efficiencies in clinical and operational processes.
+    <!-- 4. HERO IMAGE SECTION (ADDED HERE) -->
+    <div class="container d-flex justify-content-center">
+        <div class="hero-image-wrapper" data-aos="zoom-in">
+            <!-- Replace 'blog2.jpg' with your actual image file name -->
+            <img src="../images/blogs/blog2.jpg" alt="AI Healthcare" class="hero-image">
+        </div>
     </div>
 
-    <h2>The Future of AI in Healthcare</h2>
-    <p>As AI technologies continue to evolve, their integration into healthcare will deepen, offering more sophisticated tools for diagnosis, treatment, and patient engagement. Embracing these advancements holds the promise of a more efficient, effective, and patient-centered healthcare system.</p>
-  </div>
+    <!-- 5. Blog Content -->
+    <div class="container py-5 blog-content">
+      <div class="blog-card" data-aos="fade-up">
+        
+        <p>Artificial Intelligence (AI) is rapidly transforming the healthcare landscape, offering innovative solutions that enhance patient care, streamline operations, and improve outcomes. From early disease detection to personalized treatment plans, AI's integration into healthcare systems is ushering in a new era of medical excellence.</p>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 Moiz Khan Sherwani. All rights reserved.
-  </footer>
+        <h3>Early Diagnosis and Predictive Analytics</h3>
+        <p>AI algorithms can analyze vast amounts of medical data to identify patterns and predict potential health issues before they become critical. For instance, machine learning models can detect early signs of diseases like cancer or diabetes by examining medical imaging or patient records, enabling timely interventions.</p>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+        <h3>Personalized Treatment Plans</h3>
+        <p>By considering individual patient data, including genetics, lifestyle, and medical history, AI can assist in crafting personalized treatment plans. This tailored approach ensures that patients receive the most effective therapies, reducing trial-and-error in treatment selection and enhancing recovery rates.</p>
+
+        <h3>Virtual Health Assistants</h3>
+        <p>AI-powered virtual assistants are becoming increasingly prevalent, providing patients with 24/7 access to medical information, appointment scheduling, and medication reminders. These tools enhance patient engagement and adherence to treatment plans, leading to better health outcomes.</p>
+
+        <h3>Streamlining Administrative Tasks</h3>
+        <p>Administrative burdens in healthcare can detract from patient care. AI can automate routine tasks such as billing, scheduling, and record-keeping, allowing healthcare professionals to focus more on patient interactions and less on paperwork.</p>
+
+        <h3>Challenges and Ethical Considerations</h3>
+        <p>While AI offers numerous benefits, it also presents challenges, including data privacy concerns, algorithmic biases, and the need for transparency in decision-making processes. Addressing these issues is crucial to ensure equitable and ethical AI deployment in healthcare.</p>
+
+        <!-- Highlight Box -->
+        <div class="highlight-box" data-aos="zoom-in">
+            <h4 class="mb-3 text-white"><i class="fas fa-chart-line me-2"></i> Did You Know?</h4>
+            <p class="mb-3 text-light">AI applications in healthcare are projected to save the industry over <strong>$150 billion annually</strong> by 2026 through efficiencies in clinical and operational processes.</p>
+            
+            <p class="text-light">This shift towards "AI in Healthcare" is not just a trend; it represents a fundamental change in how we approach wellness, diagnosis, and treatment.</p>
+        </div>
+
+        <h3>The Future of AI in Healthcare</h3>
+        <p>As AI technologies continue to evolve, their integration into healthcare will deepen, offering more sophisticated tools for diagnosis, treatment, and patient engagement. Embracing these advancements holds the promise of a more efficient, effective, and patient-centered healthcare system.</p>
+
+      </div>
+
+      <!-- Back to Insights Button -->
+      <div class="text-center mt-5">
+          <a href="../index.html#news" class="btn btn-glow btn-lg">
+              <i class="fas fa-arrow-left me-2"></i> Back to Insights
+          </a>
+      </div>
+
+    </div>
+
+    <!-- 6. Footer -->
+    <footer class="text-white text-center py-3">
+      <div class="container">
+        <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- 7. Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+    </script>
+    <!-- Your Master Script File -->
+    <script src="../css/script.js"></script>
 </body>
 </html>
