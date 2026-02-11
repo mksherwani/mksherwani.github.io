@@ -2,20 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Medical Image Synthesis - Moiz Khan Sherwani</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Image Synthesis | Moiz Khan Sherwani</title>
     
-    <!-- Bootstrap 5 CSS -->
+    <!-- 1. Master CSS File -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- 2. Bootstrap (Layout) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome -->
+    
+    <!-- 3. FontAwesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- AOS Animation Library -->
+    
+    <!-- 4. AOS (Animations) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
+    <!-- 5. Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- 6. Inline CSS (Backup for consistency) -->
     <style>
-        /* --- GLOBAL VARIABLES (If using a CSS file, copy everything in this <style> tag) --- */
         :root {
             --primary-bg: #0f172a;
             --accent-color: #38bdf8;
@@ -26,7 +32,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--primary-bg);
             color: var(--text-light);
             overflow-x: hidden;
@@ -44,7 +50,7 @@
             background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
         }
 
-        /* Navigation (Same as Index) */
+        /* Navbar */
         .navbar {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(10px);
@@ -54,27 +60,33 @@
         .nav-link { color: #cbd5e1 !important; margin: 0 10px; transition: color 0.3s; }
         .nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
 
-        /* Page Header (Replacing Hero Section) */
+        /* Page Header */
         .page-header {
-            min-height: 60vh;
+            min-height: 40vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
-            margin-top: 60px; /* Offset for fixed navbar */
+            margin-top: 80px;
             padding: 0 20px;
         }
-
         .page-header h1 {
             font-weight: 700;
             background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 3.5rem;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
         }
+        .page-header p { color: #94a3b8; font-size: 1.25rem; }
 
-        /* Glass Cards */
+        /* Glass Card Layout */
+        .blog-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -83,17 +95,25 @@
             border-radius: 20px;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             padding: 3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             position: relative;
             z-index: 1;
         }
-
-        .highlight-text {
-            color: var(--accent-color);
-            font-weight: 600;
+    
+        .blog-card h2 { color: #fff; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .blog-card h3 { color: var(--accent-color); margin-top: 2rem; margin-bottom: 1rem; }
+        .blog-card p { color: #cbd5e1; margin-bottom: 1.5rem; }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
         }
 
-        /* Diagram/Image Styling */
+        /* Diagram Container */
         .diagram-container {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
@@ -101,39 +121,19 @@
             border: 1px solid var(--glass-border);
             margin: 2rem 0;
         }
-        
         .diagram-container img {
             width: 100%;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-
-        /* Typography */
-        h2 {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-        
-        p {
-            line-height: 1.8;
-            color: #cbd5e1;
-            font-size: 1.1rem;
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .page-header h1 { font-size: 2.5rem; }
-            .glass-card { padding: 1.5rem; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Neural Network Canvas Background -->
+    <!-- 1. Neural Canvas Background -->
     <canvas id="neural-canvas"></canvas>
 
-    <!-- Navigation -->
+    <!-- 2. Navigation (Standard) -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html"><i class="fas fa-dna me-2"></i> Moiz K. Sherwani</a>
@@ -143,32 +143,34 @@
             <div id="navbarContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="index.html#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html#research">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#news">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Header / Hero -->
+    <!-- 3. Header -->
     <header class="page-header" data-aos="fade-down">
-        <div class="container">
-            <div class="badge mb-3 px-3 py-2 rounded-pill border border-info text-info bg-opacity-10 bg-info">
-                <i class="fas fa-brain me-2"></i> Deep Learning Project
-            </div>
-            <h1>Medical Image Synthesis</h1>
-            <p class="lead text-muted mt-3">MR-only synthetic CT generation for brain tumor automated radiotherapy</p>
+      <div class="container">
+        <div class="badge mb-3 px-3 py-2 rounded-pill border border-info text-info bg-opacity-10 bg-info">
+            <i class="fas fa-brain me-2"></i> Deep Learning Project
         </div>
+        <h1>Medical Image Synthesis</h1>
+        <p class="lead">MR-only synthetic CT generation for brain tumor automated radiotherapy</p>
+      </div>
     </header>
 
-    <!-- Project Overview -->
+    <!-- 4. Project Overview -->
     <section>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="glass-card" data-aos="fade-up">
-                        <h2 class="text-center"><i class="fas fa-microscope me-2 text-info"></i>Project Overview</h2>
+                        <h2 class="text-center">Project Overview</h2>
                         <p>
                             This project focuses on integrating advanced imaging technologies with artificial intelligence 
                             for faster, more accurate diagnosis. In modern radiotherapy, achieving precision is everything.
@@ -179,7 +181,7 @@
                             Computed <strong>Tomography (CT)</strong>, on the other hand, is necessary for those calculations but struggles with soft tissue contrast. 
                         </p>
                         <p>
-                            This gap inspired a growing field focused on generating <span class="highlight-text">synthetic CT (sCT)</span> images directly from MR scans.
+                            This gap inspired a growing field focused on generating <span class="text-info">synthetic CT (sCT)</span> images directly from MR scans.
                         </p>
                     </div>
                 </div>
@@ -187,7 +189,7 @@
         </div>
     </section>
 
-    <!-- Flow Diagram -->
+    <!-- 5. Flow Diagram -->
     <section>
         <div class="container">
             <div class="row justify-content-center">
@@ -195,7 +197,8 @@
                     <h2 class="text-center mb-4" data-aos="fade-up">Process Flow</h2>
                     
                     <div class="diagram-container" data-aos="zoom-in">
-                        <img src="images/flow-diagram.png" alt="Medical Imaging Workflow" 
+                        <!-- Ensure 'images/flow-diagram.png' exists in your folder -->
+                        <img src="images/flow-diagram.png" alt="Medical Imaging Workflow" class="img-fluid" 
                              onerror="this.src='https://picsum.photos/seed/flow/800/400'">
                     </div>
                     
@@ -207,28 +210,49 @@
         </div>
     </section>
 
-    <!-- Impact & Future -->
+    <!-- 6. Impact & Future -->
     <section style="padding-bottom: 100px;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="glass-card" data-aos="fade-up">
-                        <h2 class="text-center"><i class="fas fa-rocket me-2 text-warning"></i>Impact & Future</h2>
+                        <h2 class="text-center"><i class="fas fa-rocket me-2"></i> Impact & Future</h2>
                         <p>
                             In this project, I applied my expertise in deep learning to develop and evaluate advanced methods for MR-to-CT translation,
-                            a process that could ultimately lead to <span class="highlight-text">MR-only radiotherapy workflows</span>, eliminating the need for additional CT scans and reducing 
+                            a process that could ultimately lead to <span class="text-info">MR-only radiotherapy workflows</span>, eliminating the need for additional CT scans and reducing 
                             patients’ exposure to ionizing radiation.
                         </p>
                         <p>
                             My research was conducted using a dataset of paired brain MR/CT volumes.  
                             Apart from image synthesis, I also conducted a thorough comparison of three loss strategies:
                         </p>
-                        <ul class="list-unstyled text-muted mb-4">
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Mean Absolute Error (MAE)</li>
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> MAE combined with Structural Similarity Index (SSIM)</li>
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> MAE combined with Perceptual Loss</li>
-                        </ul>
-                        <p>
+                        
+                        <!-- Strategies List -->
+                        <div class="row g-3 mt-3">
+                            <div class="col-md-4 text-center">
+                                <div class="p-3 border border-secondary rounded">
+                                    <i class="fas fa-ruler-combined fa-2x text-primary mb-2"></i>
+                                    <h6 class="fw-bold">MAE</h6>
+                                    <small class="text-muted">Mean Absolute Error</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="p-3 border border-secondary rounded">
+                                    <i class="fas fa-expand-arrows-alt fa-2x text-info mb-2"></i>
+                                    <h6 class="fw-bold">MAE + SSIM</h6>
+                                    <small class="text-muted">Structural Similarity Index</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="p-3 border border-secondary rounded">
+                                    <i class="fas fa-eye fa-2x text-warning mb-2"></i>
+                                    <h6 class="fw-bold">Perceptual Loss</h6>
+                                    <small class="text-muted">Advanced Feature Matching</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mt-4">
                             This work not only highlights my hands-on experience with deep convolutional neural networks (DCNNs) and loss function engineering,
                             but also my commitment to creating efficient, clinically viable solutions that advance personalized care.
                         </p>
@@ -237,7 +261,7 @@
                             outcomes while reducing manual errors. Future iterations aim to integrate real-time feedback and cloud-based systems.
                         </p>
 
-                        <!-- Future Vision Image -->
+                        <!-- Future Vision -->
                         <div class="diagram-container mt-4" data-aos="flip-up">
                             <img src="images/future-vision.jpg" class="img-fluid rounded shadow" alt="Future Vision" 
                                  onerror="this.src='https://picsum.photos/seed/future/800/300'">
@@ -248,91 +272,20 @@
         </div>
     </section>
 
-    <!-- Scripts -->
+    <!-- 7. Footer -->
+    <footer class="text-white text-center py-3" style="background: rgba(15, 23, 42, 0.95) !important; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 8. Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
     <script>
-        // --- 1. Initialize AOS ---
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-
-        // --- 2. Neural Network Canvas Animation (Copy this to your master JS file) ---
-        const canvas = document.getElementById('neural-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        });
-
-        const mouse = { x: null, y: null, radius: 150 };
-        window.addEventListener('mousemove', (event) => { mouse.x = event.x; mouse.y = event.y; });
-        window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
-
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
-            }
-            draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = '#38bdf8'; ctx.fill();
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx*dx + dy*dy);
-                if (distance < mouse.radius + this.size) {
-                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 10;
-                    if (mouse.x > this.x && this.x > this.size * 10) this.x -= 10;
-                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 10;
-                    if (mouse.y > this.y && this.y > this.size * 10) this.y -= 10;
-                }
-                this.x += this.directionX; this.y += this.directionY; this.draw();
-            }
-        }
-
-        function initParticles() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 2) - 1;
-                let directionY = (Math.random() * 2) - 1;
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, '#38bdf8'));
-            }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate); ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
-            connect();
-        }
-
-        function connect() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
-                    + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width/7) * (canvas.height/7)) {
-                        opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue + ')';
-                        ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
-                    }
-                }
-            }
-        }
-        initParticles(); animate();
+        AOS.init({ duration: 800, once: true, offset: 100 });
     </script>
+    <!-- Your Master Script File -->
+    <script src="css/script.js"></script>
 </body>
 </html>
