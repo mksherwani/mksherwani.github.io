@@ -3,135 +3,235 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI transforming everyday life</title>
+  <title>The Rise of AI | Moiz Khan Sherwani</title>
+  
+  <!-- 1. Master CSS File -->
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <!-- 2. Bootstrap (Layout) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- 3. FontAwesome (Icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <!-- 4. AOS (Animations) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- 5. Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+  <!-- 6. Inline CSS (Backup) -->
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.7;
-      padding-top: 70px;
+    :root {
+      --primary-bg: #0f172a;
+      --accent-color: #38bdf8;
+      --secondary-accent: #818cf8;
+      --text-light: #f1f5f9;
+      --glass-bg: rgba(30, 41, 59, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
     }
 
-    .hero {
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-light);
+      line-height: 1.7;
+      overflow-x: hidden;
       position: relative;
-      height: 60vh;
-      background: 
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url('../images/blogs/blog3.jpg') center center / cover no-repeat;
+    }
+
+    /* Neural Canvas Background */
+    #neural-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .navbar-brand { font-weight: 700; color: var(--accent-color) !important; }
+    .nav-link { color: #cbd5e1 !important; margin: 0 10px; transition: color 0.3s; }
+    .nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
+
+    /* Blog Header */
+    .page-header {
+      min-height: 40vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
       text-align: center;
+      position: relative;
+      margin-top: 80px;
+      padding: 0 20px;
+    }
+    .page-header h1 {
+      font-weight: 700;
+      background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p { color: #94a3b8; font-size: 1.25rem; }
+
+    /* Hero Image Section */
+    .hero-image-wrapper {
+        width: 100%;
+        max-width: 900px;
+        margin: -30px auto 40px auto; /* Pull it up closer to header */
+        position: relative;
+        z-index: 1;
+    }
+    .hero-image {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        border: 2px solid rgba(56, 189, 248, 0.3); /* Cyan glow border */
+        display: block;
     }
 
-    .hero h1 {
-      font-size: 2.8rem;
-      font-weight: 600;
-      text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
-    }
-
-    .content-container {
+    /* Blog Content */
+    .blog-content {
       max-width: 800px;
-      margin: 2rem auto;
+      margin: 0 auto;
+    }
+    
+    .blog-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      padding: 3rem;
+      margin-bottom: 3rem;
+    }
+    
+    .blog-card h2 { color: #fff; margin-bottom: 1.5rem; }
+    .blog-card h3 { color: var(--accent-color); margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+    .blog-card p { color: #cbd5e1; margin-bottom: 1.5rem; }
+
+    .highlight-box {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--accent-color);
+      border-radius: 15px;
       padding: 2rem;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    .callout {
-      background-color: #f0f8ff;
-      border-left: 5px solid #0d6efd;
-      padding: 1rem;
-      margin-bottom: 2rem;
-      border-radius: 5px;
-    }
-
-    pre {
-      background-color: #f8f9fa;
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 3rem;
-      padding-bottom: 2rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
-
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="../index.html">Moiz Khan Sherwani, Ph.D.</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#research">Research</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#news">Blogs</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#publications">Publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
-        </ul>
+
+    <!-- 1. Neural Canvas Background -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- 2. Navigation (Standard) -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html"><i class="fas fa-dna me-2"></i> Moiz K. Sherwani</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="fa fa-bars" style="color: white;"></span>
+            </button>
+            <div id="navbarContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../index.html#news">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../publications.html">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. Header -->
+    <header class="page-header" data-aos="fade-down">
+      <div class="container">
+        <div class="badge mb-3 px-3 py-2 rounded-pill border border-info text-info bg-opacity-10 bg-info">
+            <i class="fas fa-robot me-2"></i> Technology
+        </div>
+        <h1>The Rise of AI</h1>
+        <p class="lead">Transforming Everyday Life</p>
       </div>
-    </div>
-  </nav>
+    </header>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <h1>The Rise of AI: Transforming Everyday Life</h1>
-    <!-- 📸 Replace the background image URL in the CSS above to change the blog banner -->
-  </div>
-
-  <!-- Blog Content -->
-  <div class="content-container">
-<p>Artificial Intelligence (AI) has rapidly evolved from a futuristic concept to an integral part of our daily lives. From the moment we wake up to the time we go to bed, AI influences various aspects of our routines, often in ways we don't even realize.</p>
-
-    <h2>Morning Rituals Enhanced by AI</h2>
-    <p>Consider your morning routine: your smartphone's alarm adapts to your sleep patterns, suggesting optimal wake-up times. Virtual assistants like Siri or Google Assistant provide weather updates, traffic conditions, and news briefings, all tailored to your preferences.</p>
-
-    <h2>AI in Transportation</h2>
-    <p>Commuting has become more efficient with AI-driven navigation apps that analyze real-time traffic data to suggest the fastest routes. Ride-sharing platforms use AI algorithms to match passengers with drivers, optimize routes, and predict demand.</p>
-
-    <h2>Smart Homes and Personal Assistants</h2>
-    <p>AI powers smart home devices that learn your habits to adjust lighting, temperature, and even suggest grocery lists. Personal assistants can schedule appointments, set reminders, and control other smart devices, creating a seamless living experience.</p>
-
-    <h2>Healthcare Innovations</h2>
-    <p>In healthcare, AI assists in early disease detection through pattern recognition in medical imaging. Wearable devices monitor vital signs, alerting users and healthcare providers to potential health issues before they become critical.</p>
-
-    <h2>Entertainment and Content Curation</h2>
-    <p>Streaming services like Netflix and Spotify use AI to analyze your viewing and listening habits, curating personalized content recommendations. Social media platforms employ AI to filter content, detect inappropriate material, and enhance user engagement.</p>
-
-    <h2>Challenges and Ethical Considerations</h2>
-    <p>While AI offers numerous benefits, it also raises concerns about privacy, job displacement, and decision-making transparency. It's crucial to address these challenges by establishing ethical guidelines and ensuring responsible AI development.</p>
-
-    <div class="callout">
-      <strong>Did You Know?</strong> AI algorithms can now compose music, write poetry, and even create visual art, blurring the lines between technology and creativity.
+    <!-- 4. HERO IMAGE SECTION -->
+    <div class="container d-flex justify-content-center">
+        <div class="hero-image-wrapper" data-aos="zoom-in">
+            <!-- Replace 'blog3.jpg' with your actual image file name -->
+            <img src="../images/blogs/blog3.jpg" alt="AI Lifestyle" class="hero-image">
+        </div>
     </div>
 
-    <h2>The Road Ahead</h2>
-    <p>As AI continues to advance, its integration into our lives will deepen. Embracing AI's potential while addressing its challenges will be key to harnessing its benefits for society.</p>
-  </div>
+    <!-- 5. Blog Content -->
+    <div class="container py-5 blog-content">
+      <div class="blog-card" data-aos="fade-up">
+        
+        <p>Artificial Intelligence (AI) has rapidly evolved from a futuristic concept to an integral part of our daily lives. From the moment we wake up to the time we go to bed, AI influences various aspects of our routines, often in ways we don't even realize.</p>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 Moiz Khan Sherwani. All rights reserved.
-  </footer>
+        <h3>Morning Rituals Enhanced by AI</h3>
+        <p>Consider your morning routine: your smartphone's alarm adapts to your sleep patterns, suggesting optimal wake-up times. Virtual assistants like Siri or Google Assistant provide weather updates, traffic conditions, and news briefings, all tailored to your preferences.</p>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+        <h3>AI in Transportation</h3>
+        <p>Commuting has become more efficient with AI-driven navigation apps that analyze real-time traffic data to suggest the fastest routes. Ride-sharing platforms use AI algorithms to match passengers with drivers, optimize routes, and predict demand.</p>
+
+        <h3>Smart Homes and Personal Assistants</h3>
+        <p>AI powers smart home devices that learn your habits to adjust lighting, temperature, and even suggest grocery lists. Personal assistants can schedule appointments, set reminders, and control other smart devices, creating a seamless living experience.</p>
+
+        <h3>Healthcare Innovations</h3>
+        <p>In healthcare, AI assists in early disease detection through pattern recognition in medical imaging. Wearable devices monitor vital signs, alerting users and healthcare providers to potential health issues before they become critical.</p>
+
+        <h3>Entertainment and Content Curation</h3>
+        <p>Streaming services like Netflix and Spotify use AI to analyze your viewing and listening habits, curating personalized content recommendations. Social media platforms employ AI to filter content, detect inappropriate material, and enhance user engagement.</p>
+
+        <h3>Challenges and Ethical Considerations</h3>
+        <p>While AI offers numerous benefits, it also raises concerns about privacy, job displacement, and decision-making transparency. It's crucial to address these challenges by establishing ethical guidelines and ensuring responsible AI development.</p>
+
+        <!-- Highlight Box -->
+        <div class="highlight-box" data-aos="zoom-in">
+            <h4 class="mb-3 text-white"><i class="fas fa-music me-2"></i> Did You Know?</h4>
+            <p class="mb-3 text-light">AI algorithms can now compose music, write poetry, and even create visual art, blurring the lines between technology and creativity.</p>
+            
+            <p class="text-light">This shift towards "AI in Everyday Life" is not just a trend; it represents a fundamental change in how we approach wellness, diagnosis, and treatment.</p>
+        </div>
+
+        <h3>The Road Ahead</h3>
+        <p>As AI continues to advance, its integration into our lives will deepen. Embracing AI's potential while addressing its challenges will be key to harnessing its benefits for society.</p>
+
+      </div>
+
+      <!-- Back to Insights Button -->
+      <div class="text-center mt-5">
+          <a href="../index.html#news" class="btn btn-glow btn-lg">
+              <i class="fas fa-arrow-left me-2"></i> Back to Insights
+          </a>
+      </div>
+
+    </div>
+
+    <!-- 6. Footer -->
+    <footer class="text-white text-center py-3">
+      <div class="container">
+        <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- 7. Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+    </script>
+    <!-- Your Master Script File -->
+    <script src="../css/script.js"></script>
 </body>
 </html>
