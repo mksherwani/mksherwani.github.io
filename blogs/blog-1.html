@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Page Title | Moiz Khan Sherwani, Ph.D.</title>
+  <title>Revolutionizing Medical Imaging with Diffusion Models | Moiz Khan Sherwani</title>
   
   <!-- 1. Master CSS File -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
   
   <!-- 2. Bootstrap (Layout) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,9 +18,9 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <!-- 5. Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- 6. INLINE CSS (Backup for Design Consistency) -->
+  <!-- 6. Inline CSS (Backup) -->
   <style>
     :root {
       --primary-bg: #0f172a;
@@ -32,9 +32,10 @@
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--primary-bg);
       color: var(--text-light);
+      line-height: 1.7;
       overflow-x: hidden;
       position: relative;
     }
@@ -60,15 +61,15 @@
     .nav-link { color: #cbd5e1 !important; margin: 0 10px; transition: color 0.3s; }
     .nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
 
-    /* Page Header (Standard for all pages) */
+    /* Blog Header */
     .page-header {
-      min-height: 50vh;
+      min-height: 40vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       position: relative;
-      margin-top: 60px;
+      margin-top: 80px;
       padding: 0 20px;
     }
     .page-header h1 {
@@ -76,93 +77,108 @@
       background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-size: 3.5rem;
+      font-size: 3rem;
       margin-bottom: 0.5rem;
     }
     .page-header p { color: #94a3b8; font-size: 1.25rem; }
 
-    /* Glass Cards */
-    .glass-card {
+    /* Blog Content */
+    .blog-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .blog-card {
       background: var(--glass-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      padding: 3rem;
+      margin-bottom: 3rem;
+    }
+    
+    .blog-card h2 { color: #fff; margin-bottom: 1.5rem; }
+    .blog-card h4 { color: var(--accent-color); margin-top: 2rem; margin-bottom: 1rem; }
+    .blog-card p { color: #cbd5e1; margin-bottom: 1.5rem; }
+    
+    /* Recommendation Box */
+    .recommendation-box {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--accent-color);
+      border-radius: 15px;
       padding: 2rem;
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 1;
+      margin-top: 3rem;
     }
 
-    /* Footer */
-    footer {
-      background: rgba(15, 23, 42, 0.95) !important;
-      border-top: 1px solid rgba(255,255,255,0.1);
+    pre {
+      background: #0b1120;
+      padding: 1.5rem;
+      border-radius: 10px;
+      color: #38bdf8;
+      overflow-x: auto;
+      border: 1px solid var(--glass-border);
     }
   </style>
 </head>
-
 <body>
-    <!-- 1. Neural Network Canvas Background -->
+
+    <!-- 1. Neural Canvas Background -->
     <canvas id="neural-canvas"></canvas>
 
-    <!-- 2. Navigation (Same on every page) -->
+    <!-- 2. Navigation (Standard) -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fas fa-dna me-2"></i> Moiz K. Sherwani</a>
+            <a class="navbar-brand" href="../index.html"><i class="fas fa-dna me-2"></i> Moiz K. Sherwani</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="fa fa-bars" style="color: white;"></span>
             </button>
             <div id="navbarContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#research">Research</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#news">Insights</a></li>
-                    <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../index.html#news">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../publications.html">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <h1>Revolutionizing Medical Imaging with Diffusion Models</h1>
-    <!-- 📸 Replace the background image URL in the CSS above to change the blog banner -->
-  </div>
+    <!-- 3. Header -->
+    <header class="page-header" data-aos="fade-down">
+      <div class="container">
+        <div class="badge mb-3 px-3 py-2 rounded-pill border border-info text-info bg-opacity-10 bg-info">
+            <i class="fas fa-magic me-2"></i> AI Trends
+        </div>
+        <h1>Revolutionizing Medical Imaging</h1>
+        <p class="lead">The Power of Diffusion Models in Healthcare</p>
+      </div>
+    </header>
 
-  <!-- Blog Content -->
-  <div class="content-container">
-    <p>Imagine going for an MRI or CT scan that’s faster, safer, and just as accurate — powered not by newer machines, but by smarter AI. That’s what diffusion models bring to the table. These models are revolutionizing how we handle medical imaging, making noisy, low-resolution scans look crystal clear. And they’re doing it fast.</p>
+    <!-- 4. Blog Content -->
+    <div class="container py-5 blog-content">
+      <div class="blog-card" data-aos="fade-up">
+        
+        <p>Imagine going for an MRI or CT scan that’s faster, safer, and just as accurate — powered not by newer machines, but by smarter AI. That’s what diffusion models bring to the table. These models are revolutionizing how we handle medical imaging, making noisy, low-resolution scans look crystal clear. And they’re doing it fast.</p>
 
-    <div class="callout">
-      <strong>Here’s what we’ll explore:</strong>
-      <ul>
-        <li>What makes diffusion models different from traditional AI</li>
-        <li>Three exciting medical applications already in use</li>
-        <li>A quick peek at how you can try this yourself</li>
-      </ul>
-    </div>
+        <h4>Why Diffusion Models Are a Big Deal</h4>
+        <p>Unlike GANs that often struggle with stability or hallucinate artifacts, diffusion models work in reverse. They start with pure noise and learn how to denoise images step-by-step, leading to cleaner, more realistic outputs. This makes them particularly suitable for medical applications, where precision is everything.</p>
 
-    <h2>Why Diffusion Models Are a Big Deal</h2>
-    <p>Unlike GANs that often struggle with stability or hallucinate artifacts, diffusion models work in reverse. They start with pure noise and learn how to denoise images step-by-step, leading to cleaner, more realistic outputs. This makes them particularly suitable for medical applications, where precision is everything.</p>
+        <h4>Three Real‑World Use Cases</h4>
+        <p>In the context of radiology, these models act as a "super-resolution" engine:</p>
+        
+        <ul class="list-unstyled text-muted ms-4">
+            <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> <strong>Safer CT Scans:</strong> Low-dose CT scans reduce radiation risk, but often at the cost of clarity. Diffusion models restore high-resolution quality to these low-dose images.</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> <strong>Faster MRIs:</strong> By capturing a quick, blurry scan and using diffusion models to enhance it, the entire process can be cut down dramatically.</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> <strong>Enhanced PET Imaging:</strong> PET scans are often noisy. AI-powered enhancement with diffusion models clears up the fuzz, improving visibility of small lesions.</li>
+        </ul>
 
-    <h2>Three Real‑World Use Cases</h2>
+        <h4>Try It Yourself</h4>
+        <p>If you want to generate medical-quality synthetic scans from scratch, it’s surprisingly easy to get started. Here’s a short Python example using Hugging Face’s <code>diffusers</code> library:</p>
 
-    <h4>1. Safer CT Scans</h4>
-    <p>Low-dose CT scans reduce radiation risk, but often at the cost of clarity. Diffusion models restore high-resolution quality to these low-dose images, helping doctors make accurate diagnoses without exposing patients to unnecessary radiation.</p>
-
-    <h4>2. Faster MRIs</h4>
-    <p>Traditional MRIs can take up to an hour. By capturing a quick, blurry scan and using diffusion models to enhance it, the entire process can be cut down dramatically — a game-changer for busy hospitals and impatient kids.</p>
-
-    <h4>3. Enhanced PET Imaging</h4>
-    <p>PET scans are often noisy and hard to interpret. AI-powered enhancement with diffusion models clears up the fuzz, improving visibility of small lesions and increasing diagnostic accuracy — especially important in oncology.</p>
-
-    <h2>Try It Yourself</h2>
-    <p>If you want to generate medical-quality synthetic scans from scratch, it’s surprisingly easy to get started. Here’s a short Python example using Hugging Face’s <code>diffusers</code> library:</p>
-
-    <pre><code>from diffusers import DDPMPipeline
+        <pre><code>from diffusers import DDPMPipeline
 import torch
 
 # Load a pretrained medical model
@@ -176,40 +192,81 @@ with torch.no_grad():
 image.save("synthetic_ct.png")
 </code></pre>
 
-    <h2>What’s Next?</h2>
-    <p>In the future, we may see federated learning—where hospitals train diffusion models without sharing sensitive data—and ultra-fast hardware integration for real-time image enhancement. The potential is immense.</p>
+        <h4>What’s Next?</h4>
+        <p>In the future, we may see federated learning—where hospitals train diffusion models without sharing sensitive data—and ultra-fast hardware integration for real-time image enhancement. The potential is immense.</p>
+        <p>Whether you're a researcher, a patient advocate, or just curious, diffusion models are not just the future—they're already reshaping the present of medical AI.</p>
+        <p><strong>💡 Curious to explore more?</strong> Check out the <a href="https://huggingface.co/models?pipeline_tag=diffusion" target="_blank" class="text-info text-decoration-none">Diffusers Library</a>.</p>
 
-    <p>Whether you're a researcher, a patient advocate, or just curious, diffusion models are not just the future—they’re already reshaping the present of medical AI.</p>
+      </div>
 
-    <p>💡 Curious to explore more? Check out <a href="https://huggingface.co/models?pipeline_tag=diffusion" target="_blank">Diffusers Library</a>.</p>
-  </div>
+      <!-- 5. Recommendation Section (NEW) -->
+      <div class="recommendation-box" data-aos="zoom-in">
+        <h3 class="mb-3"><i class="fas fa-tools me-2"></i> Recommended AI Tools</h3>
+        <p class="mb-3">For researchers looking to experiment with these models, I recommend exploring these specific libraries and environments designed for medical imaging:</p>
+        
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="d-flex align-items-start mb-3">
+                    <div class="me-3 mt-1"><i class="fab fa-python fa-2x text-warning"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-1">MONAI</h6>
+                        <p class="small text-muted mb-0">The Medical Open Network for AI. It is PyTorch-based and includes standard architectures specifically optimized for 3D medical imaging (CT, MRI).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-start mb-3">
+                    <div class="me-3 mt-1"><i class="fas fa-heartbeat fa-2x text-danger"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-1">NVIDIA MONAI</h6>
+                        <p class="small text-muted mb-0">While MONAI is open-source, NVIDIA's implementation offers GPU-optimized containers for training diffusion models at scale.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-start mb-3">
+                    <div class="me-3 mt-1"><i class="fas fa-cube fa-2x text-primary"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-1">TotalSegmentator</h6>
+                        <p class="small text-muted mb-0">A platform specifically for segmenting medical images. Great for quickly annotating datasets to train your own diffusion models.</p>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-6">
+                <div class="d-flex align-items-start mb-3">
+                    <div class="me-3 mt-1"><i class="fas fa-server fa-2x text-info"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Hugging Face Med</h6>
+                        <p class="small text-muted mb-0">A curated repository of medical diffusion models. It is the best place to find pre-trained weights to fine-tune.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
 
-  <!-- Footer -->
-    <!-- Footer -->
+      <!-- Back to Insights Button -->
+      <div class="text-center mt-5">
+          <a href="../index.html#news" class="btn btn-glow btn-lg">
+              <i class="fas fa-arrow-left me-2"></i> Back to Insights
+          </a>
+      </div>
+
+    </div>
+
+    <!-- 6. Footer -->
     <footer class="text-white text-center py-3">
       <div class="container">
         <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
       </div>
     </footer>
 
-    <!-- Scripts (Required for Layout & Animation) -->
-    <!-- 1. Bootstrap JS -->
+    <!-- 7. Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- 2. AOS Animation JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- 3. Initialize AOS -->
     <script>
-        AOS.init({
-          duration: 800,
-          once: true,
-          offset: 100
-        });
+        AOS.init({ duration: 800, once: true, offset: 100 });
     </script>
-
-    <!-- 4. Your Master Script File (Neural Canvas) -->
-    <script src="css/script.js"></script>
-
+    <!-- Your Master Script File -->
+    <script src="../css/script.js"></script>
 </body>
 </html>
