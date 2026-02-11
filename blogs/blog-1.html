@@ -3,92 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Revolutionizing Medical Imaging with Diffusion Models</title>
+  <title>Page Title | Moiz Khan Sherwani, Ph.D.</title>
+  
+  <!-- 1. Master CSS File -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- 2. Bootstrap (Layout) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- 3. FontAwesome (Icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <!-- 4. AOS (Animations) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- 5. Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+  <!-- 6. INLINE CSS (Backup for Design Consistency) -->
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.7;
-      padding-top: 70px;
+    :root {
+      --primary-bg: #0f172a;
+      --accent-color: #38bdf8;
+      --secondary-accent: #818cf8;
+      --text-light: #f1f5f9;
+      --glass-bg: rgba(30, 41, 59, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
     }
 
-    .hero {
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-light);
+      overflow-x: hidden;
       position: relative;
-      height: 60vh;
-      background: 
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url('../images/blogs/blog1.jpg') center center / cover no-repeat;
+    }
+
+    /* Neural Canvas Background */
+    #neural-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .navbar-brand { font-weight: 700; color: var(--accent-color) !important; }
+    .nav-link { color: #cbd5e1 !important; margin: 0 10px; transition: color 0.3s; }
+    .nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
+
+    /* Page Header (Standard for all pages) */
+    .page-header {
+      min-height: 50vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
       text-align: center;
+      position: relative;
+      margin-top: 60px;
+      padding: 0 20px;
     }
-
-    .hero h1 {
-      font-size: 2.8rem;
-      font-weight: 600;
-      text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
+    .page-header h1 {
+      font-weight: 700;
+      background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
     }
+    .page-header p { color: #94a3b8; font-size: 1.25rem; }
 
-    .content-container {
-      max-width: 800px;
-      margin: 2rem auto;
+    /* Glass Cards */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
       padding: 2rem;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    .callout {
-      background-color: #f0f8ff;
-      border-left: 5px solid #0d6efd;
-      padding: 1rem;
       margin-bottom: 2rem;
-      border-radius: 5px;
+      position: relative;
+      z-index: 1;
     }
 
-    pre {
-      background-color: #f8f9fa;
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-
+    /* Footer */
     footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 3rem;
-      padding-bottom: 2rem;
+      background: rgba(15, 23, 42, 0.95) !important;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
   </style>
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="../index.html">Moiz Khan Sherwani, Ph.D.</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#research">Research</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#news">Blogs</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#publications">Publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- 1. Neural Network Canvas Background -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- 2. Navigation (Same on every page) -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-dna me-2"></i> Moiz K. Sherwani</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="fa fa-bars" style="color: white;"></span>
+            </button>
+            <div id="navbarContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#news">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
   <!-- Hero Section -->
   <div class="hero">
@@ -149,11 +185,31 @@ image.save("synthetic_ct.png")
   </div>
 
   <!-- Footer -->
-  <footer>
-    &copy; 2025 Moiz Khan Sherwani. All rights reserved.
-  </footer>
+    <!-- Footer -->
+    <footer class="text-white text-center py-3">
+      <div class="container">
+        <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
+      </div>
+    </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Scripts (Required for Layout & Animation) -->
+    <!-- 1. Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- 2. AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- 3. Initialize AOS -->
+    <script>
+        AOS.init({
+          duration: 800,
+          once: true,
+          offset: 100
+        });
+    </script>
+
+    <!-- 4. Your Master Script File (Neural Canvas) -->
+    <script src="css/script.js"></script>
+
 </body>
 </html>
