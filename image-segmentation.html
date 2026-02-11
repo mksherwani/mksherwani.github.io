@@ -103,6 +103,23 @@
         .glass-card h2 { color: #fff; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
         .glass-card h3 { color: var(--accent-color); margin-top: 2rem; margin-bottom: 1rem; }
         .glass-card p { color: #cbd5e1; margin-bottom: 1.5rem; line-height: 1.7; }
+       
+        /* HERO IMAGE WRAPPER (ADDED HERE) */
+        .hero-image-wrapper {
+            width: 100%;
+            max-width: 900px;
+            margin: -30px auto 40px auto; /* Pull it up slightly to overlap header */
+            position: relative;
+            z-index: 1;
+        }
+        .hero-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid rgba(56, 189, 248, 0.3); /* Cyan glow border */
+            display: block;
+        }
 
         /* Diagram/Image Styling */
         .diagram-container {
@@ -154,7 +171,13 @@
         <p class="lead">Lesion segmentation in lung CT using unsupervised Generative Adversarial Network (GAN)</p>
       </div>
     </header>
-
+    <!-- 4. HERO IMAGE SECTION (ADDED HERE) -->
+    <div class="container d-flex justify-content-center">
+        <div class="hero-image-wrapper" data-aos="zoom-in">
+            <!-- Replace 'brain.jpg' with your actual image file name -->
+            <img src="images/segmentation.jpg" alt="Medical Imaging Concept" class="hero-image">
+        </div>
+    </div>
     <!-- 4. Project Overview -->
     <section>
         <div class="container">
@@ -191,8 +214,7 @@
                     
                     <div class="diagram-container" data-aos="zoom-in">
                         <!-- Ensure 'covid-segmentation-flow.png' exists in your folder -->
-                        <img src="images/covid-segmentation-flow.png" alt="Lesion Segmentation Workflow" class="img-fluid" 
-                             onerror="this.src='https://picsum.photos/seed/flow/800/400'">
+                        <img src="images/segwf.png" alt="Lesion Segmentation Workflow" class="img-fluid">
                     </div>
                     
                     <p class="text-center text-muted fst-italic" data-aos="fade-up" data-aos-delay="100">
