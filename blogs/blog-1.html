@@ -81,7 +81,21 @@
       margin-bottom: 0.5rem;
     }
     .page-header p { color: #94a3b8; font-size: 1.25rem; }
-
+    .hero-image-wrapper {
+        width: 100%;
+        max-width: 900px;
+        margin: -30px auto 40px auto; /* Pull it up closer to header */
+        position: relative;
+        z-index: 1;
+    }
+    .hero-image {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        border: 2px solid rgba(56, 189, 248, 0.3); /* Cyan glow border */
+        display: block;
+    }
     /* Blog Content */
     .blog-content {
       max-width: 800px;
