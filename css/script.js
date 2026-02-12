@@ -1,5 +1,4 @@
 // --- 1. Initialize AOS ---
-// Note: This runs when the script is loaded
 document.addEventListener('DOMContentLoaded', function() {
     AOS.init({
         duration: 800,
@@ -83,3 +82,40 @@ function connect() {
 
 initParticles(); 
 animate();
+
+// --------------------------
+// 3. EmailJS Form Integration
+// --------------------------
+
+// Include EmailJS SDK dynamically
+(function() {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js';
+    script.onload = () => {
+        emailjs.init('i157hwitElIfO8xj7'); // <-- Replace with your EmailJS public key
+
+        const contactForm = document.querySelector('form');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            emailjs.send('service_cj7qtcb', 'template_50tpthg', {
+                from_name: name,
+                from_email: email,
+                message: message
+            })
+            .then(function(response) {
+                alert('Message sent successfully! ✅');
+                contactForm.reset();
+            }, function(error) {
+                alert('Oops! Something went wrong. ❌');
+                console.error('EmailJS Error:', error);
+            });
+        });
+    };
+    document.body.appendChild(script);
+})();
