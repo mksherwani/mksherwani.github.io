@@ -248,6 +248,29 @@
                 padding: 0;
             }
         }
+        /* Contact form input and textarea styling */
+        .form-control {
+            background: rgba(255, 255, 255, 0.05); /* semi-transparent dark */
+            border: 1px solid var(--glass-border);
+            color: var(--text-light) !important;   /* force light text */
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        /* Placeholder text color */
+        .form-control::placeholder {
+            color: rgba(241, 245, 249, 0.6); /* slightly dimmed light */
+        }
+        
+        /* Focus state */
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+            outline: none;
+            color: var(--text-light) !important;  /* ensure text stays light on focus */
+        }
 
 
     </style>
