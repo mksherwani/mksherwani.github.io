@@ -190,33 +190,39 @@
           padding: 2rem;
           margin-bottom: 2rem;
         }
-        .contact-block {
-            display: inline-block; /* Or block depending on layout */
+        .contact-item-link {
+            display: block; /* makes it take full width if needed */
             text-decoration: none;
-            color: #fff; /* default text color */
-            transition: all 0.3s ease;
+            color: inherit; /* inherit text color */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .contact-block:hover {
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* glow effect */
-            transform: scale(1.05); /* subtle grow */
+        /* Hover effect for glow and slight scale */
+        .contact-item-link:hover .contact-item {
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.6); /* glow effect, blue for LinkedIn */
+            transform: scale(1.05);
+            border-radius: 8px; /* optional rounding */
         }
         
-        .contact-block .contact-text {
-            padding: 10px 15px;
-            border-radius: 8px;
+        /* Optional: hover icon color */
+        .contact-item-link:hover .contact-item-icon i {
+            color: #0A66C2; /* LinkedIn brand blue */
+        }
+        
+        /* Ensure internal spacing is maintained */
+        .contact-item {
             display: flex;
             align-items: center;
-            gap: 10px; /* space between text and icon */
+            gap: 10px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border-radius: 8px; /* match hover radius */
         }
         
-        .contact-block i {
+        .contact-item-icon i {
             font-size: 1.5rem;
             transition: color 0.3s ease;
         }
-        
-        .contact-block:hover i {
-            color: #6cc644; /* optional accent color for GitHub */
-        }
+
 
     </style>
