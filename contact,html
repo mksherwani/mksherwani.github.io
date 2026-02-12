@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact Me | Moiz Khan Sherwani</title>
+    
+    <!-- 1. Master CSS File -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- 2. Bootstrap (Layout) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- 3. FontAwesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- 4. AOS (Animations) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- 5. Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- 6. Inline CSS (Backup for consistency) -->
+    <style>
+        :root {
+            --primary-bg: #0f172a;
+            --accent-color: #38bdf8;
+            --secondary-accent: #818cf8;
+            --text-light: #f1f5f9;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Neural Canvas Background */
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .navbar-brand { font-weight: 700; color: var(--accent-color) !important; }
+        .nav-link { color: #cbd5e1 !important; margin: 0 10px; transition: color 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
+
+        /* Page Header */
+        .page-header {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            margin-top: 80px;
+            padding: 0 20px;
+        }
+        .page-header h1 {
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { color: #94a3b8; font-size: 1.25rem; }
+
+        /* Glass Card Layout */
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+    
+        .contact-label {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        /* Form Inputs */
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+            outline: none;
+        }
+        
+        /* Button */
+        .btn-glow {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        .btn-glow:hover {
+            background: var(--accent-color);
+            color: #0f172a;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Contact Info Items */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease;
+        }
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Neural Canvas Background -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- 2. Navigation (Standard) -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-dna me-2"></i> Moiz K. Sherwani</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="fa fa-bars" style="color: white;"></span>
+            </button>
+            <div id="navbarContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#news">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#publications">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. Header -->
+    <header class="page-header" data-aos="fade-down">
+        <div class="container">
+            <div class="badge mb-3 px-3 py-2 rounded-pill border border-info text-info bg-opacity-10 bg-info">
+                <i class="fas fa-envelope me-2"></i> Get In Touch
+            </div>
+            <h1>Let's Collaborate</h1>
+            <p class="lead">Have a project in mind? Let's discuss how AI can solve your challenges.</p>
+        </div>
+    </header>
+
+    <!-- 4. Contact Content -->
+    <section class="py-5">
+        <div class="container contact-content">
+            <div class="glass-card" data-aos="fade-up">
+                
+                <p class="text-center text-muted mb-4">
+                    I am currently open to new opportunities in <strong>AI for Healthcare</strong>, 
+                    <strong>Translational Medicine</strong>, and <strong>Computational Biology</strong>. 
+                    Whether you have a research proposal, a job opportunity, or just want to say hello.
+                </p>
+
+                <!-- Contact Form -->
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="contact-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Dr. Jane Doe" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="contact-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="jane.doe@example.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="contact-label">Message</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="How can I help you?" required></textarea>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-glow">
+                            <i class="fas fa-paper-plane me-2"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 3rem 0;">
+
+                <!-- Alternative Contact Info -->
+                <div class="row justify-content-center text-center">
+                    
+                    <!-- Email -->
+                    <div class="col-md-4">
+                        <a href="mailto:mk_sherwani@hotmail.com" class="contact-item">
+                            <div class="me-3 fs-2 text-info"><i class="fas fa-envelope"></i></div>
+                            <div class="text-start">
+                                <h6 class="fw-bold mb-1">Email</h6>
+                                <p class="mb-0 text-muted">mk_sherwani@hotmail.com</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- LinkedIn -->
+                    <div class="col-md-4">
+                        <a href="https://www.linkedin.com/in/mk-sherwani" target="_blank" class="contact-item">
+                            <div class="me-3 fs-3" style="color: #0077b5;"><i class="fab fa-linkedin"></i></div>
+                            <div class="text-start">
+                                <h6 class="fw-bold mb-1">LinkedIn</h6>
+                                <p class="mb-0 text-muted">Connect professionally</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- GitHub -->
+                    <div class="col-md-4">
+                        <a href="https://github.com/mksherwani" target="_blank" class="contact-item">
+                            <div class="me-3 fs-3" style="color: #fff;"><i class="fab fa-github"></i></div>
+                            <div class="text-start">
+                                <h6 class="fw-bold mb-1">GitHub</h6>
+                                <p class="mb-0 text-muted">View Code & Projects</p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Footer -->
+    <footer class="text-white text-center py-3" style="background: rgba(15, 23, 42, 0.95) !important; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <p>&copy; 2025 Moiz Khan Sherwani, Ph.D. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 6. Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+    </script>
+    <!-- Your Master Script File -->
+    <script src="css/script.js"></script>
+</body>
+</html>
