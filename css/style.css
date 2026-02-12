@@ -223,6 +223,31 @@
             font-size: 1.5rem;
             transition: color 0.3s ease;
         }
+        /* Ensure the two columns are equal height */
+        .row.align-items-stretch {
+            align-items: stretch;
+        }
+        
+        /* Make the form card fill the column height */
+        .col-lg-6 > .glass-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* Optional: add padding for contact links on left */
+        .col-lg-6.d-flex.flex-column.align-items-center.gap-4 {
+            padding: 1rem;
+        }
+        
+        /* Keep contact items responsive on small screens */
+        @media (max-width: 992px) {
+            .col-lg-6.d-flex.flex-column.align-items-center.gap-4 {
+                align-items: stretch;
+                padding: 0;
+            }
+        }
 
 
     </style>
