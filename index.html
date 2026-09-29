@@ -325,7 +325,11 @@
         }
 
         .story-caption {
-            position: relative;
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
             z-index: 2;
             text-align: center;
             pointer-events: none;
@@ -339,6 +343,7 @@
             color: var(--accent-color);
             font-weight: 600;
             margin-bottom: 0.75rem;
+            text-shadow: 0 2px 12px rgba(15, 23, 42, 0.9);
         }
 
         .story-caption h3 {
@@ -347,6 +352,7 @@
             max-width: 560px;
             margin: 0 auto;
             color: var(--text-light);
+            text-shadow: 0 2px 14px rgba(15, 23, 42, 0.9);
         }
 
         .story-scroll-cue {
@@ -382,7 +388,8 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="fas fa-dna me-2"></i> Moiz Khan Sherwani
+                <img src="images/mks-wordmark.png" alt="Moiz Khan Sherwani" style="height: 30px; width: auto; margin-right: 10px; vertical-align: middle;">
+                Moiz Khan Sherwani
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fa fa-bars" style="color: white;"></span>
